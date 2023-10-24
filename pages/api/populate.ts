@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/db/prisma';
 import fs from "fs"
 
 type Data = {
@@ -16,12 +15,12 @@ export default function handler(
 
   fs.writeFileSync("../../public/4.webp", data);
 
-  prisma.object.create({
-    data: {
-      UID: Math.ceil(Math.random() * 10000),
-      value: Math.ceil(Math.random() * 10000)
-    }
-  })
+  // prisma.object.create({
+  //   data: {
+  //     UID: Math.ceil(Math.random() * 10000),
+  //     value: Math.ceil(Math.random() * 10000)
+  //   }
+  // })
 
   res.status(200).json({ name: 'John Doe' })
 }
