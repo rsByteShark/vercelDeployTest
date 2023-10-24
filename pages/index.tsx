@@ -11,7 +11,7 @@ export default function Home() {
   const [data, updateData] = useState<{ UID: number, value: number }[]>([]);
 
 
-  fetch("/api/recive").then(res => {
+  fetch("/api/recive", { method: "POST" }).then(res => {
 
     res.json().then(data => {
 
