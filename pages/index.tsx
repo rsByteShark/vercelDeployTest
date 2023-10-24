@@ -15,6 +15,8 @@ export default function Home() {
 
     res.json().then(data => {
 
+      console.log(data);
+
       updateData(data);
 
     })
