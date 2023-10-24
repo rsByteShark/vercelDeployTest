@@ -10,18 +10,22 @@ export default function Home() {
 
   const [data, updateData] = useState<{ UID: number, value: number }[]>([]);
 
+  if (!data.length) {
 
-  fetch("https://vercel-deploy-test-psi-eosin.vercel.app/api/recive", { method: "POST", credentials: "same-origin" }).then(res => {
+    fetch("https://vercel-deploy-test-psi-eosin.vercel.app/api/recive", { method: "POST", credentials: "same-origin" }).then(res => {
 
-    res.json().then(data => {
+      res.json().then(data => {
 
-      console.log(data);
+        console.log(data);
 
-      updateData(data);
+        updateData([{ UID: 2000, value: 1000 }]);
+
+      })
 
     })
 
-  })
+  }
+
 
   return (
     <>
