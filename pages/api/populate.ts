@@ -12,9 +12,9 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
 
-  const data = fs.readFileSync("../../public/3.webp");
+  // const data = fs.readFileSync("../../public/3.webp");
 
-  fs.writeFileSync("../../public/4.webp", data);
+  // fs.writeFileSync("../../public/4.webp", data);
 
   prisma.object.create({
     data: {
