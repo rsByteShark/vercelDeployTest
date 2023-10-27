@@ -4,21 +4,27 @@ import fs from "fs"
 import prisma from "@/db/prisma"
 
 
-type Data = {
-  name: string
-}
 
-export default function handler(
+
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
 
-  prisma.object.create({
+  await prisma.object.create({
     data: {
       UID: Math.ceil(Math.random() * 10000),
       value: Math.ceil(Math.random() * 10000)
     }
+  }).catch(err => {
+
+    res.status(200).json(err)
+
+  }).then(() => {
+
+    res.status(200).json({ ok: "ok" })
+
   })
 
-  res.status(200).json({ name: 'John Doe' })
+
 }
