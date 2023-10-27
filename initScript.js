@@ -1,24 +1,42 @@
 const path = require('path');
 const fs = require('fs');
 const { spawn } = require('child_process');
+const { get } = require('https');
+const os = require("os");
 
 (async () => {
 
-    console.log('Init script started');
+    console.log(`Init script started on ${os.platform} sysytem\n\n`);
 
-    const directoryPath = path.join(__dirname);
-    //passsing directoryPath and callback function
-    fs.readdir(directoryPath, function (err, files) {
-        //handling error
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        }
-        //listing all files using forEach
-        files.forEach(function (file) {
-            // Do whatever you want to do with the file
-            console.log(file);
-        });
-    });
+
+    console.log("creating new files in public dir...\n\n");
+    const data = fs.readFileSync("./public/3.webp");
+    fs.writeFileSync("./public/4.webp", data);
+
+    console.log('Pinging fakestoreapi...\n\n');
+
+
+    await new Promise((resolve) => {
+
+        get("https://fakestoreapi.com/products/1", (res) => {
+
+            console.log(`fakeapistore responded with code: ${res.statusCode}\n\n`);
+
+            res.on("data", (fkstrdata) => {
+
+                console.log(`Data from fakestore: ${fkstrdata.toString()}\n\n`);
+
+                resolve();
+
+            })
+
+        })
+
+
+    })
+
+
+    console.log('Starting next build...');
 
 
     spawn("next", ["build"], {
