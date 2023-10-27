@@ -36,14 +36,32 @@ const os = require("os");
     })
 
 
-    console.log('Starting next build...');
+    console.log('Generating from prisma schema');
 
 
-    spawn("next", ["build"], {
+    const prismaDBPushProcess = spawn("npx", ["prisma", "generate"], {
         stdio: "inherit",
         cwd: process.cwd(),
         env: process.env,
         shell: true
     });
+
+
+    prismaDBPushProcess.on("exit", () => {
+
+
+        console.log('Starting next build...');
+
+
+        spawn("next", ["build"], {
+            stdio: "inherit",
+            cwd: process.cwd(),
+            env: process.env,
+            shell: true
+        });
+
+    })
+
+
 
 })()
