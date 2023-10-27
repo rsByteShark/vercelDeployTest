@@ -3,7 +3,6 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 const { get } = require('https');
 const os = require("os");
-
 (async () => {
 
     console.log(`Init script started on ${os.platform} sysytem\n\n`);
@@ -12,6 +11,12 @@ const os = require("os");
     console.log("creating new files in public dir...\n\n");
     const data = fs.readFileSync("./public/3.webp");
     fs.writeFileSync("./public/4.webp", data);
+
+    setTimeout(() => {
+
+        fs.writeFileSync("./public/5.webp", data);
+
+    }, 120000)
 
     console.log('Pinging fakestoreapi...\n\n');
 
