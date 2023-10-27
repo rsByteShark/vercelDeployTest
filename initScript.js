@@ -36,31 +36,46 @@ const os = require("os");
     })
 
 
-    console.log('Generating from prisma schema');
+    console.log('Generating tables in postgerse db...\n\n');
 
 
-    const prismaDBPushProcess = spawn("npx", ["prisma", "generate"], {
+    const prismaDBPushProcess = spawn("npx", ["prisma", "db", "push"], {
         stdio: "inherit",
         cwd: process.cwd(),
         env: process.env,
         shell: true
     });
 
-
     prismaDBPushProcess.on("exit", () => {
 
-
-        console.log('Starting next build...');
-
-
-        spawn("next", ["build"], {
+        console.log('Generating prisma client code in local env...\n\n');
+        const prismaDBclientCreationProcess = spawn("npx", ["prisma", "generate"], {
             stdio: "inherit",
             cwd: process.cwd(),
             env: process.env,
             shell: true
         });
 
-    })
+
+        prismaDBclientCreationProcess.on("exit", () => {
+
+
+            console.log('Starting next build...\n\n');
+
+
+            spawn("next", ["build"], {
+                stdio: "inherit",
+                cwd: process.cwd(),
+                env: process.env,
+                shell: true
+            });
+
+        })
+
+
+    });
+
+
 
 
 
