@@ -9,10 +9,6 @@ export default async function handler(
     res: NextApiResponse
 ) {
 
-    if (req.headers['Authorization'] !== `Bearer ${process.env.CRON_SECRET}`) {
-        return res.status(401).end('Unauthorized');
-    }
-
     try {
 
         const obj = await prisma.object.create({

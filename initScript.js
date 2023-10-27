@@ -12,11 +12,6 @@ const os = require("os");
     const data = fs.readFileSync("./public/3.webp");
     fs.writeFileSync("./public/4.webp", data);
 
-    const x = fs.readFileSync("./vercel.json");
-
-    console.log(x.toString());
-
-
 
     console.log('Pinging fakestoreapi...\n\n');
 
