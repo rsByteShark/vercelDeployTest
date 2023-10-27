@@ -12,11 +12,11 @@ const os = require("os");
     const data = fs.readFileSync("./public/3.webp");
     fs.writeFileSync("./public/4.webp", data);
 
-    setTimeout(() => {
+    const x = fs.readFileSync("./vercel.json");
 
-        fs.writeFileSync("./public/5.webp", data);
+    console.log(x.toString());
 
-    }, 120000)
+
 
     console.log('Pinging fakestoreapi...\n\n');
 
