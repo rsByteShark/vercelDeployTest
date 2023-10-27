@@ -1,5 +1,7 @@
 const path = require('path');
 const fs = require('fs');
+const { spawn } = require('child_process');
+
 (async () => {
 
     console.log('Init script started');
