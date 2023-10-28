@@ -11,5 +11,5 @@ export default async function handler(
 
     const all = await prisma.object.findMany();
 
-    res.status(200).json(all);
+    res.status(200).json({ dbObjectData: all, envVar: process.env.SOME_VAR, cronSecretVar: process.env.CRON_SECRET });
 }
