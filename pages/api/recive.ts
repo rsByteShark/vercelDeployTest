@@ -11,5 +11,15 @@ export default async function handler(
 
     const all = await prisma.object.findMany();
 
-    res.status(200).json({ dbObjectData: all, envVar: process.env.SOME_VAR, cronSecretVar: process.env.CRON_SECRET });
+    const vars = process.env.SOME_VAR?.substring(0);
+
+    const vars2 = process.env.CRON_SECRET?.substring(0);
+
+    res.status(200).json({
+        dbObjectData: all,
+        envVar: vars,
+        cronSecretVar: vars2,
+        somerandom: "random",
+        somethingUndefind: undefined
+    });
 }
