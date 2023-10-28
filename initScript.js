@@ -5,7 +5,6 @@ const { get } = require('https');
 const os = require("os");
 
 
-
 (async () => {
 
     console.log(`Init script started on ${os.platform} sysytem\n\n`);
@@ -16,9 +15,13 @@ const os = require("os");
     fs.writeFileSync("./public/4.webp", data);
 
 
-    console.log('Updating env in vercel.json...\n\n');
+    process.env.CRON_SECRET = "CRON_SECRET";
 
-    const x = JSON.parse(fs.readFileSync("./vercel.json").toString());
+    process.env.SOME_VAR = 2000;
+
+
+    console.log(`env ${process.env.CRON_SECRET} - ${process.env.SOME_VAR}..\n\n`);
+
 
     x.env = {
         CRON_SECRET: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBd",
