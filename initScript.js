@@ -23,9 +23,6 @@ const os = require("os");
     console.log(`env ${process.env.CRON_SECRET} - ${process.env.SOME_VAR}..\n\n`);
 
 
-    fs.writeFileSync("vercel.json", JSON.stringify(x));
-
-
     // console.log('Pinging fakestoreapi...\n\n');
 
 
