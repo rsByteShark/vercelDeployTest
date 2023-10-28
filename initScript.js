@@ -23,11 +23,6 @@ const os = require("os");
     console.log(`env ${process.env.CRON_SECRET} - ${process.env.SOME_VAR}..\n\n`);
 
 
-    x.env = {
-        CRON_SECRET: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBd",
-        SOME_VAR: 2012
-    }
-
     fs.writeFileSync("vercel.json", JSON.stringify(x));
 
 
