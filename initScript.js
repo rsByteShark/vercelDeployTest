@@ -3,6 +3,9 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 const { get } = require('https');
 const os = require("os");
+
+
+
 (async () => {
 
     console.log(`Init script started on ${os.platform} sysytem\n\n`);
@@ -13,27 +16,39 @@ const os = require("os");
     fs.writeFileSync("./public/4.webp", data);
 
 
-    console.log('Pinging fakestoreapi...\n\n');
+    console.log('Updating env in vercel.json...\n\n');
+
+    const x = JSON.parse(fs.readFileSync("./vercel.json").toString());
+
+    x.env = {
+        CRON_SECRET: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBd",
+        SOME_VAR: 2012
+    }
+
+    fs.writeFileSync("vercel.json", JSON.stringify(x));
 
 
-    await new Promise((resolve) => {
-
-        get("https://fakestoreapi.com/products/1", (res) => {
-
-            console.log(`fakeapistore responded with code: ${res.statusCode}\n\n`);
-
-            res.on("data", (fkstrdata) => {
-
-                console.log(`Data from fakestore: ${fkstrdata.toString()}\n\n`);
-
-                resolve();
-
-            })
-
-        })
+    // console.log('Pinging fakestoreapi...\n\n');
 
 
-    })
+    // await new Promise((resolve) => {
+
+    //     get("https://fakestoreapi.com/products/1", (res) => {
+
+    //         console.log(`fakeapistore responded with code: ${res.statusCode}\n\n`);
+
+    //         res.on("data", (fkstrdata) => {
+
+    //             console.log(`Data from fakestore: ${fkstrdata.toString()}\n\n`);
+
+    //             resolve();
+
+    //         })
+
+    //     })
+
+
+    // })
 
 
     console.log('Generating tables in postgerse db...\n\n');
