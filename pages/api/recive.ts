@@ -17,8 +17,8 @@ export default async function handler(
 
     res.status(200).json({
         dbObjectData: all,
-        envVar: vars,
-        cronSecretVar: vars2,
+        envVar: vars || "undefind",
+        cronSecretVar: vars2 || "undefind",
         somerandom: "random",
         somethingUndefind: undefined
     });

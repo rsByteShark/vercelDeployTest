@@ -19,8 +19,26 @@ const os = require("os");
 
     process.env.SOME_VAR = 2000;
 
+    fs.writeFileSync("./.env.local", `CRON_SECRET=LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBd\n 
+    SOME_VAR=2012`)
+
 
     console.log(`env ${process.env.CRON_SECRET} - ${process.env.SOME_VAR}..\n\n`);
+
+
+    const directoryPath = path.join(__dirname);
+    //passsing directoryPath and callback function
+    fs.readdir(directoryPath, function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        }
+        //listing all files using forEach
+        files.forEach(function (file) {
+            // Do whatever you want to do with the file
+            console.log(file);
+        });
+    });
 
 
     // console.log('Pinging fakestoreapi...\n\n');
